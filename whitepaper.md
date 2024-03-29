@@ -465,9 +465,9 @@ OWND Project において利用する技術の選定においては、以下の�
 
     SIOPv2におけるHolderの識別子として、JSON Web Key (JWK) Thumbprintを利用し、Verifier毎に異なる識別子を発行しています。
 
-##### OWND Walletで用いる秘密鍵
+##### OWND Walletで用いる鍵
 
-OWND Walletでは、3種類の秘密鍵を用途に合わせて生成し、利用しています。
+OWND Walletでは、3種類の鍵を用途に合わせて生成し、利用しています。
 
 * HolderバインディングのためにVC内に記載するHolder識別子を生成するための秘密鍵
 
