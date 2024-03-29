@@ -756,7 +756,45 @@ AliceはSIOPv2によりHomeServerにアカウントを作成し、OID4VPによ�
 
 ### 7.4 Trusted Web アーキテクチャとの関係
 
-TBD
+[Trusted Web ホワイトペーパー ver.3.0](https://github.com/TrustedWebPromotionCouncil/Documents/blob/master/21_white_paper_ver3.0_Japanese/Trusted_Web_%E3%83%9B%E3%83%AF%E3%82%A4%E3%83%88%E3%83%9A%E3%83%BC%E3%83%91%E3%83%BC_v3.0_%E5%AE%9F%E8%A3%85%E7%B7%A8.md#3-trusted-web%E3%81%AE%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3) では以下の要素が示されています。
+
+* Verifiable Data
+* Verifiable Messaging
+* Verifiable Identity
+
+それぞれに対しOWND Projectのアーキテクチャとの対応を示します。
+
+#### 7.4.1  Verifiable Data
+
+* X.509サーバー証明書
+ 
+    Issuerの信頼性の担保のために、使用しているOV（Organization Validation）証明書はIssuerの実在性を確認した上で、Certificate Authorityが発行していることから、Verifiable Dataであると言えます。
+
+* Issuerから発行されるHolderの属性を証明するVC
+
+    Holderの属性を証明するためのにIssuerから発行されるVerifiable Credentialは、IssuerがHolderの属性を確認したうえでIssuerのVerifiable Identityを含めた検証可能な証明書を発行していることから、Verifiable Dataであると言えます。
+
+#### 7.4.2 Verifiable Messaging
+
+* Matrix protocol + VC（OWND Messenger）
+
+    受信者と送信者が相互にIdentityを確認した上で、時系列にメッセージのやり取りを行うことができるものであるが、Verifiable Messagingの要素であるVerifiable Transactionでは、発信の順序が検証出来る形で記録されるものされていること、メッセージそのものにVerifiable Identityが含まれるものとされていることから、Verifiable Messagingではありません。
+    OWND Messengerでは、Verifiable Messagingを実現するコンセプトとして、受信者および送信者が直接相互に属性およびそのメッセージを検証可能なメッセージングを目指しているが、現状においては受信者および送信者はHomeServerに対して属性の証明を行うため、受信者および送信者は検証を行っておらず、また、HomeServerがメッセージの順序等を検証可能な形式で提供するものではありません。
+
+#### 7.4.3 Verifiable Identity
+
+* Issuer識別子 + OV証明書
+
+    Issuerの識別子としてのドメインと、そのドメインに対してCertificate Authorityが発行するOV証明書は、そのドメインが実在するIssuerによって管理されていることを示すVerifiable Identityであると言えます。
+
+* VCに紐づくHolder識別子 + VP
+
+    OWND Wallet内の秘密鍵から生成されるHolder識別子と、IssuerがHolderの属性を確認した上で、その識別子に対してIssuerから発行されるVCを内包し、Holder識別子に紐づく秘密鍵で署名されたVPは、VerifierがVPの提示者がその属性を保有していること、およびIsserによって発行されたことが検証できることからVerifiable Identityであると言えます。
+    また、内包されるVCには上記のIssuer識別子 + OV証明書も含まれることからIssuerのVerifiable Identityを検証することも可能です。
+
+* SIOPv2における識別子として利用されるHolder識別子 + id_token
+
+    SIOPv2における識別子として、OWND Wallet内の秘密鍵から生成されるHolder識別子と、その秘密鍵で署名されたid_tokenは、Relying Partyがid_tokenの提示者がそのHolder識別子を保有していることをid_tokenを検証することによって確認することができることからVerifiable Identityであると言えます。
 
 ## 8. ロードマップとマイルストーン
 
