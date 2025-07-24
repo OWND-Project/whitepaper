@@ -1,4 +1,4 @@
-# OWND Project Whitepaper （ドラフト）
+# OWND Project Whitepaper
 
   - [1. イントロダクション](#1-イントロダクション)
     - [1.1 OWND Project の概要](#11-ownd-project-の概要)
